@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yangi Vazifa Qo'shish</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            margin: 0;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-form {
+            width: 400px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            display: block;
+            margin-top: 50px;
+        }
+
+
+
+        .form-group {
+            margin-bottom: 20px;
+            padding: 0 20px 0 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <header>
+        <h1>Yangi Vazifa Qo'shish</h1>
+        <nav>
+            <ul>
+                <li><a href="daily.html">Kunlik Reja</a></li>
+                <li><a href="weekly.html">Haftalik Reja</a></li>
+                <li><a href="monthly.html">Oylik Reja</a></li>
+                <li><a href="main.html">Asosiy Rejalar</a></li>
+                <li><a href="all.html">Barcha Rejalar</a></li>
+                <li><a href="add_task.html">Yangi Vazifa Qo'shish</a></li>
+                <li><a href="messages.html">Xabarlar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form class="task-form" id="taskForm">
+            <div class="form-group">
+                <label for="taskName">Vazifa Nomi:</label>
+                <input type="text" id="taskName" required>
+            </div>
+            <div class="form-group">
+                <label for="taskDesc">Vazifa Tavsifi:</label>
+                <textarea id="taskDesc" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="taskType">Reja Turi:</label>
+                <select id="taskType" required>
+                    <option value="kunlik">Kunlik</option>
+                    <option value="haftalik">Haftalik</option>
+                    <option value="oylik">Oylik</option>
+                    <option value="asosiy">Asosiy</option>
+                </select>
+            </div>
+            <button type="submit">Vazifani Qo'shish</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MZIYO My own to-do list</p>
+    </footer>
+
+    <script>
+        document.getElementById('taskForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Formani yuborishni to'xtatish
+
+            const taskName = document.getElementById('taskName').value;
+            const taskDesc = document.getElementById('taskDesc').value;
+            const taskType = document.getElementById('taskType').value;
+
+            // Saqlangan vazifalarni olish yoki bo'sh array
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            // Yangi vazifani arrayga qo'shish
+            tasks.push({ name: taskName, desc: taskDesc, type: taskType });
+
+            // LocalStorage'da yangilash
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            alert('Vazifa muvaffaqiyatli qo\'shildi!');
+            this.reset(); // Formani tozalash
+        });
+
+    </script>
+</body>
+
+</html>

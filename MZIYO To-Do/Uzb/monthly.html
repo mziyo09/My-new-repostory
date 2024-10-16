@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oylik Rejalar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Modal stili bir xil bo'lgani uchun Kunlik Rejalar sahifasidagi style ni oling */
+        .view-desc-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Oylik Rejalar</h1>
+        <nav>
+            <ul>
+                <li><a href="daily.html">Kunlik Reja</a></li>
+                <li><a href="weekly.html">Haftalik Reja</a></li>
+                <li><a href="monthly.html">Oylik Reja</a></li>
+                <li><a href="main.html">Asosiy Rejalar</a></li>
+                <li><a href="all.html">Barcha Rejalar</a></li>
+                <li><a href="add_task.html">Yangi Vazifa Qo'shish</a></li>
+                <li><a href="messages.html">Xabarlar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="task-list">
+            <h2>Oylik Rejalar</h2>
+            <ul id="tasksContainer">
+                <!-- Oylik vazifalar shu yerda ko'rsatiladi -->
+            </ul>
+        </div>
+    </main>
+
+    <!-- Modal oyna Kunlik Rejalar sahifasidagidek qoladi -->
+
+    <footer>
+        <p>&copy; 2024 MZIYO My own to-do list</p>
+    </footer>
+
+    <script>
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const tasksContainer = document.getElementById('tasksContainer');
+        const taskModal = document.getElementById('taskModal');
+        const taskDescModal = document.getElementById('taskDescModal');
+        const closeModal = document.getElementsByClassName('close')[0];
+
+        function displayTasks(taskType) {
+            tasksContainer.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                if (task.type === taskType) {
+                    const taskItem = document.createElement('li');
+                    taskItem.classList.add('task-item');
+                    taskItem.innerHTML = `<strong>${task.name}</strong>
+                        <button class="view-desc-btn" onclick="openModal('${task.desc}')"><i class="fas fa-eye"></i></button>`;
+                    tasksContainer.appendChild(taskItem);
+                }
+            });
+        }
+
+        // Oylik rejalarni ko'rsatish
+        displayTasks('oylik');
+
+        // Modalni ochish funksiyasi Kunlik sahifadagi kabi
+        function openModal(description) {
+            taskDescModal.innerHTML = description;
+            taskModal.style.display = 'block';
+        }
+
+        // Modalni yopish funksiyasi Kunlik sahifadagi kabi
+        closeModal.onclick = function() {
+            taskModal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+            if (event.target == taskModal) {
+                taskModal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+/* Umumiy uslublar */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    /* Orqa fon rangi */
+    color: #343a40;
+    /* Matn rangi */
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    /* Ro'yxat belgilari yo'q qilinadi */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    /* Elementlar markazlashadi */
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    /* Pastki chiziq yo'q qilinadi */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #e2e6ea;
+}
+
+/* Sahifa asosiy qismlari */
+main {
+    padding: 20px;
+    min-height: 80vh;
+    /* Sahifa uzunligini qoplaydi */
+}
+
+h1 {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Formlar uchun uslub */
+.form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Footer uchun uslub */
+footer {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Mobil versiya uchun moslashtirilgan navbar */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+/* Task ro'yxati uchun style */
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.task-list li {
+    background-color: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-left: 5px solid #007bff;
+    border-top: 1px solid #007bff;
+    border-right: 1px solid #007bff;
+    border-bottom: 1px solid #007bff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-list li .task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #007bff;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+.icon-button:hover {
+    color: #0056b3;
+}
+
+.icon-button i {
+    margin-right: 5px;
+}
+
+/* Popup (Izoh ko'rsatish oynasi) */
+.popup {
+    display: none;
+    position: fixed;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    max-width: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.popup.show {
+    display: block;
+}
+
+.popup-close {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.overlay.show {
+    display: block;
+}
+
+.container a {
+    text-decoration: none;
+    color: #343a40;
+}
+
+.container a:hover{
+    color: white;
+    transition: 0.3s;
+}

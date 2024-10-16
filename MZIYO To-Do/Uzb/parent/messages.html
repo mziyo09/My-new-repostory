@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xabarlar</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .message-list {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+
+        .message-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            height: 90px;
+        }
+
+        .message-item:last-child {
+            border-bottom: none;
+        }
+
+        .delete-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            margin-top: 20px;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff1a1a;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1></h1>
+        <nav>
+            <ul>
+                <li><a href="daily.html">Kunlik Reja</a></li>
+                <li><a href="weekly.html">Haftalik Reja</a></li>
+                <li><a href="monthly.html">Oylik Reja</a></li>
+                <li><a href="main.html">Asosiy Rejalar</a></li>
+                <li><a href="all.html">Barcha Rejalar</a></li>
+                <li><a href="messages.html">Xabarlar</a></li>
+                <li><a href="add_message.html">Xabar Yozish </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="message-list" id="messagesContainer">
+            <!-- Ota-onalardan kelgan xabarlar shu yerda ko'rsatiladi -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MZIYO My own to-do list</p>
+    </footer>
+
+    <script>
+        // Ota-onalardan kelgan xabarlarni olish
+        const messagesContainer = document.getElementById('messagesContainer');
+        const messages = JSON.parse(localStorage.getItem('messagesMziyo')) || [];
+
+        // Xabarlarni ko'rsatish funksiyasi
+        function displayMessages() {
+            messagesContainer.innerHTML = ''; // Oldingi xabarlarni tozalash
+
+            messages.forEach((message, index) => {
+                const messageItem = document.createElement('div');
+                messageItem.classList.add('message-item');
+                messageItem.innerHTML = `
+                    <strong>MZIYO</strong>: ${message.text}
+                    <button class="delete-btn" onclick="deleteMessage(${index})"><i class="fas fa-trash-alt"></i></button>
+                    
+                `;
+                messagesContainer.appendChild(messageItem);
+            });
+        }
+
+        // Xabarni o'chirish funksiyasi
+        function deleteMessage(index) {
+            messages.splice(index, 1); // Xabarni olib tashlash
+            localStorage.setItem('messagesMziyo', JSON.stringify(messages)); // Yangilangan xabarlarni saqlash
+            displayMessages(); // Xabarlarni qayta ko'rsatish
+        }
+
+        // Xabarlarni ko'rsatish
+        displayMessages();
+    </script>
+</body>
+
+</html>

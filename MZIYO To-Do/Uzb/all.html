@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcha Rejalar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <h1>Barcha Rejalar</h1>
+        <nav>
+            <ul>
+                <li><a href="daily.html">Kunlik Reja</a></li>
+                <li><a href="weekly.html">Haftalik Reja</a></li>
+                <li><a href="monthly.html">Oylik Reja</a></li>
+                <li><a href="main.html">Asosiy Rejalar</a></li>
+                <li><a href="all.html">Barcha Rejalar</a></li>
+                <li><a href="add_task.html">Yangi Vazifa Qo'shish</a></li>
+                <li><a href="messages.html">Xabarlar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="task-list">
+            <h2>Rejalar Ro'yxati</h2>
+            <ul id="tasksContainer">
+                <!-- Vazifalar shu yerga kiritiladi -->
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MZIYO My own to-do list</p>
+    </footer>
+
+    <!-- Script for Task Management -->
+    <script>
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const tasksContainer = document.getElementById('tasksContainer');
+
+        function displayTasks() {
+            tasksContainer.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                const taskItem = document.createElement('li');
+                taskItem.classList.add('task-item');
+
+                taskItem.innerHTML = `
+                    <div class="task-info">
+                        <strong>${task.name}</strong> - ${task.type}
+                    </div>
+                    <div class="task-actions">
+                        <button onclick="viewTask(${index})"><i class="fas fa-eye"></i></button>
+                        <button onclick="editTask(${index})"><i class="fas fa-edit"></i></button>
+                        <button onclick="deleteTask(${index})"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                tasksContainer.appendChild(taskItem);
+            });
+        }
+
+        function viewTask(index) {
+            const task = tasks[index];
+            alert(`Tavsif: ${task.desc}`);
+        }
+
+        function editTask(index) {
+            const password = prompt('Parolni kiriting:');
+            if (password === 'MZIYO') { // PASSWORD
+                const newTaskName = prompt('Vazifaning yangi nomini kiriting:', tasks[index].name);
+                const newTaskDesc = prompt('Vazifaning yangi tavsifini kiriting:', tasks[index].desc);
+                const newTaskType = prompt('Reja turini kiriting:', tasks[index].type);
+                tasks[index] = { name: newTaskName, desc: newTaskDesc, type: newTaskType };
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                displayTasks();
+            } else {
+                alert('Noto\'g\'ri parol!');
+            }
+        }
+
+        function deleteTask(index) {
+            const password = prompt('Parolni kiriting:');
+            if (password === '2009') {
+                tasks.splice(index, 1);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                displayTasks();
+            } else {
+                alert('Noto\'g\'ri parol!');
+            }
+        }
+
+        displayTasks();
+    </script>
+</body>
+</html>
